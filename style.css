@@ -1,0 +1,229 @@
+:root {
+    --primary: #0070f3; /* Runable Blue */
+    --bg: #ffffff;
+    --text: #111111;
+    --gray: #666666;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    text-align: center;
+}
+
+header {
+    padding: 60px 20px;
+}
+
+.logo {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.hero {
+    max-width: 600px;
+    margin: -40px auto 80px;
+    padding: 0 20px;
+}
+
+.hero-image {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--gray);
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.card {
+    width: 250px;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+footer {
+    margin-top: 100px;
+    padding: 40px;
+    background: #fafafa;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+.footer-link {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+/* Repos list: left-aligned with thumbnail on left and description on right */
+.repo-section .container-grid {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.repo-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 16px;
+}
+
+/* card wrapper now holds title on top; row holds thumb + content */
+.repo-card {
+    display: block;
+    padding: 16px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.repo-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start; /* ensure image + text align at their top */
+    margin-top: 8px;
+}
+
+.repo-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex: 0 0 80px;
+    background: #f4f4f4;
+    align-self: flex-start; /* force thumbnail to align to top of row */
+    margin: 0; /* remove any top margin */
+}
+
+.repo-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* keep description and link starting at the top */
+}
+
+/* Remove default top margins so text starts at the same top as the image */
+.repo-content > * {
+    margin-top: 0;
+}
+
+.repo-desc {
+    margin: 0 0 10px 0; /* explicit spacing below description */
+}
+
+/* Responsive: stack image above content on small screens */
+@media (max-width: 560px) {
+    .repo-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .repo-thumb {
+        width: 100%;
+        height: 140px;
+        flex: none;
+    }
+}
+
+/* Plane animation (periodic left→right flight with slight up/down and scale to simulate depth) */
+.plane {
+    position: fixed;
+    top: 10%;
+    left: 0;
+    width: 240px; /* doubled size */
+    max-width: 30vw;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translateX(-60vw) scale(0.6);
+    opacity: 0;
+    animation: planeFly 7.75s linear infinite; /* 40% slower than 4.615s -> ~6.461, but based on current 5.538s -> 7.753 */
+    will-change: transform, opacity;
+}
+
+/* Keyframes: plane stays off-screen most of the time, then briefly flies left→right with larger vertical bobbing */
+@keyframes planeFly {
+  0%   { transform: translateX(-60vw) translateY(0)    scale(0.6);   opacity: 0; }
+  29%  { transform: translateX(-60vw) translateY(0)    scale(0.6);   opacity: 0; } /* waiting off-screen */
+  30%  { transform: translateX(-10vw) translateY(-60px) scale(0.72);  opacity: 1; } /* appears with strong up */
+  42%  { transform: translateX(20vw)  translateY(60px)  scale(0.86);  opacity: 1; } /* big down bob */
+  56%  { transform: translateX(60vw)  translateY(-50px) scale(0.96);  opacity: 1; } /* up bob */
+  65%  { transform: translateX(100vw) translateY(70px)  scale(1);     opacity: 0.9; } /* exit with bob */
+  72%  { transform: translateX(130vw) translateY(0)    scale(1);     opacity: 0; } /* off-screen */
+  100% { transform: translateX(130vw) translateY(0)    scale(1);     opacity: 0; }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .plane {
+    animation: none;
+    display: none;
+  }
+}
