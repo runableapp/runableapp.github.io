@@ -6,6 +6,58 @@
     <title>Runable.App</title>
     <link rel="icon" type="image/x-icon" href="/i/favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .repo-thumb-clickable {
+            cursor: pointer;
+        }
+        .repo-thumb-clickable:hover {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow: auto;
+        }
+        .modal-content {
+            background-color: #000;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #D3D7CF;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            z-index: 1001;
+        }
+        .modal-close:hover {
+            color: #FCE94F;
+        }
+    </style>
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -43,12 +95,12 @@
 
                 <div class="repo-grid">
                     <article class="repo-card">
-                        <h3 class="repo-title">📝 PostNote</h3>
+                        <h3 class="repo-title">🔍 gsearch-cli</h3>
                         <div class="repo-row">
-                            <img src="/i/PostNote.webp" alt="App Engine screenshot" class="repo-thumb">
+                            <img src="gsearch-cli/gsearch-cli-screenshot.png" alt="gsearch-cli screenshot" class="repo-thumb repo-thumb-clickable" id="gsearchThumb">
                             <div class="repo-content">
-                                <p class="repo-desc">PostNote is based on Indicator Stickynotes, originally written in Python by Umang Varma. While I like the application, it unfortunately does not work properly on Wayland. PostNote is a modern rewrite in Go, designed for Linux on Wayland.</p>
-                                <a href="https://github.com/runableapp/postnote" class="repo-link">View Repository</a>
+                                <p class="repo-desc">A command-line interface for searching the FSearch database. This Go application reads and searches the binary database file created by <a href="https://github.com/cboxdoerfer/fsearch" target="_blank" rel="noopener noreferrer">FSearch</a>.</p>
+                                <a href="https://github.com/runableapp/gsearch-cli" class="repo-link">View Repository</a>
                             </div>
                         </div>
                     </article>
@@ -75,10 +127,39 @@
 
     <footer>
         <div class="footer-content">
-            <p>© 2025 <a href="https://runable.app" class="footer-link">Runable.App</a></p>
+            <p>© 2025-<span id="currentYear"></span> <a href="https://runable.app" class="footer-link">Runable.App</a></p>
             <a href="https://runable.app/contact" class="footer-link">📧 Get in Touch</a>
         </div>
     </footer>
+
+    <div id="gsearchModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeGsearchModal()">&times;</button>
+            <iframe src="/gsearch-cli/index.html" title="gsearch-cli full view"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const gsearchThumb = document.getElementById('gsearchThumb');
+        const gsearchModal = document.getElementById('gsearchModal');
+
+        gsearchThumb.addEventListener('click', function() {
+            gsearchModal.style.display = 'block';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === gsearchModal) {
+                gsearchModal.style.display = 'none';
+            }
+        });
+
+        function closeGsearchModal() {
+            gsearchModal.style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>

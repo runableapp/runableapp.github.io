@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gsearch-cli Test Runner</title>
+    <style>
+        body {
+            background-color: black;
+            color: #D3D7CF;
+            font-family: monospace;
+            margin: 0;
+            padding: 10px;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<pre><span style="background-color:#585858"><font color="#D3D7CF">$ </font></span>./test-run.sh 
+<font color="#3465A4">=== gsearch-cli Test Runner ===</font>
+
+<font color="#4E9A06">✓ Test database already exists: test.db</font>
+
+<font color="#FCE94F"><b>Step 2: Displaying database statistics...</b></font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-stats</b></font>
+Explanation: Shows database metadata including number of folders, files, and index flags
+
+Database Statistics:
+  Folders: 5
+  Files: 5
+  Total entries: 10
+  Index flags: 13
+  Sorted arrays: 0
+
+<font color="#FCE94F"><b>Step 3: Running search queries...</b></font>
+
+<font color="#3465A4">--- Search 1: Find files/folders containing &apos;test&apos; ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">test</font>
+Explanation: Searches for entries with &apos;test&apos; in the name (case-insensitive by default)
+
+Found 2 result(s):
+
+📄 /home/user/test.txt (1.0 KB)
+📄 /Documents/test.go (8.0 KB)
+
+<font color="#3465A4">--- Search 2: Find files only containing &apos;test&apos; ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">test</font> <font color="#34E2E2"><b>-files</b></font>
+Explanation: Same search but filters to show only files, excluding folders
+
+Found 2 result(s):
+
+📄 /home/user/test.txt (1.0 KB)
+📄 /Documents/test.go (8.0 KB)
+
+<font color="#3465A4">--- Search 3: Find folders containing &apos;doc&apos; ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">doc</font> <font color="#34E2E2"><b>-folders</b></font>
+Explanation: Searches for folders with &apos;doc&apos; in the name, excluding files
+
+Found 1 result(s):
+
+📁 /Documents
+
+<font color="#3465A4">--- Search 4: Search in full path for &apos;home&apos; ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-path</b></font> <font color="#4E9A06">home</font>
+Explanation: Searches in the full path (not just name) for entries containing &apos;home&apos;
+
+Found 4 result(s):
+
+📁 /home
+📁 /home/user
+📄 /home/user/test.txt (1.0 KB)
+📄 /home/user/readme.txt (2.0 KB)
+
+<font color="#3465A4">--- Search 5: Case-sensitive search for &apos;Test&apos; ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">Test</font> <font color="#34E2E2"><b>-case</b></font>
+Explanation: Case-sensitive search that will only match &apos;Test&apos; (capital T), not &apos;test&apos;
+
+No results found.
+
+<font color="#3465A4">--- Search 6: Limit results to 1 ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">test</font> <font color="#34E2E2"><b>-max</b></font> <font color="#4E9A06">1</font>
+Explanation: Limits the search results to maximum 1 result
+
+Found 1 result(s):
+
+📄 /home/user/test.txt (1.0 KB)
+
+<font color="#3465A4">--- Search 7: Wildcard - Find all .txt files ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">&apos;*.txt&apos;</font>
+Explanation: Wildcard pattern * matches any sequence. *.txt finds all files ending with .txt
+
+Found 2 result(s):
+
+📄 /home/user/test.txt (1.0 KB)
+📄 /home/user/readme.txt (2.0 KB)
+
+<font color="#3465A4">--- Search 8: Wildcard - Find files starting with &apos;test&apos; ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">&apos;test*&apos;</font>
+Explanation: Wildcard pattern test* matches files starting with &apos;test&apos; followed by any characters
+
+Found 2 result(s):
+
+📄 /home/user/test.txt (1.0 KB)
+📄 /Documents/test.go (8.0 KB)
+
+<font color="#3465A4">--- Search 9: Wildcard - Find files with single char + .go ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">&apos;?.go&apos;</font>
+Explanation: Wildcard pattern ? matches a single character. ?.go finds files like &apos;a.go&apos;, &apos;b.go&apos;
+
+No results found.
+
+<font color="#3465A4">--- Search 10: Wildcard path search - Find all in /home/* ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-path</b></font> <font color="#4E9A06">&apos;/home/*&apos;</font>
+Explanation: Wildcard patterns work in path searches too. /home/* finds all entries under /home
+
+Found 3 result(s):
+
+📁 /home/user
+📄 /home/user/test.txt (1.0 KB)
+📄 /home/user/readme.txt (2.0 KB)
+
+<font color="#3465A4">--- Search 11: JSON output format ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">test</font> <font color="#34E2E2"><b>-output</b></font> <font color="#4E9A06">json</font>
+Explanation: Output results in JSON format with structured fields: name, path, type, size, mtime
+
+[
+  {
+    &quot;name&quot;: &quot;test.txt&quot;,
+    &quot;path&quot;: &quot;/home/user/test.txt&quot;,
+    &quot;type&quot;: &quot;file&quot;,
+    &quot;size&quot;: 1024,
+    &quot;mtime&quot;: &quot;2026-01-03T18:36:00-05:00&quot;,
+    &quot;mtime_ts&quot;: 1767483360
+  },
+  {
+    &quot;name&quot;: &quot;test.go&quot;,
+    &quot;path&quot;: &quot;/Documents/test.go&quot;,
+    &quot;type&quot;: &quot;file&quot;,
+    &quot;size&quot;: 8192,
+    &quot;mtime&quot;: &quot;2026-01-03T18:36:00-05:00&quot;,
+    &quot;mtime_ts&quot;: 1767483360
+  }
+]
+
+<font color="#3465A4">--- Search 12: CSV output format ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">test</font> <font color="#34E2E2"><b>-output</b></font> <font color="#4E9A06">csv</font>
+Explanation: Output results in CSV format with header row, suitable for spreadsheet import
+
+name,path,type,size,mtime
+test.txt,/home/user/test.txt,file,1024,2026-01-03T18:36:00-05:00
+test.go,/Documents/test.go,file,8192,2026-01-03T18:36:00-05:00
+
+<font color="#3465A4">--- Search 13: Sort results by size ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">&apos;*&apos;</font> <font color="#34E2E2"><b>-sort</b></font> <font color="#4E9A06">size</font>
+Explanation: Sort all results by file size (ascending). Folders are sorted by name when sorting by size
+
+Found 10 result(s):
+
+📁 /
+📁 /Documents
+📁 /Downloads
+📁 /home
+📁 /home/user
+📄 /home/user/test.txt (1.0 KB)
+📄 /home/user/readme.txt (2.0 KB)
+📄 /Documents/document.pdf (4.0 KB)
+📄 /Documents/test.go (8.0 KB)
+📄 /Downloads/file.zip (16.0 KB)
+
+<font color="#3465A4">--- Search 14: Sort results by modification time ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">&apos;*&apos;</font> <font color="#34E2E2"><b>-sort</b></font> <font color="#4E9A06">mtime</font>
+Explanation: Sort results by modification time (oldest first)
+
+Found 10 result(s):
+
+📁 /
+📁 /home
+📁 /home/user
+📁 /Documents
+📁 /Downloads
+📄 /home/user/test.txt (1.0 KB)
+📄 /home/user/readme.txt (2.0 KB)
+📄 /Documents/document.pdf (4.0 KB)
+📄 /Documents/test.go (8.0 KB)
+📄 /Downloads/file.zip (16.0 KB)
+
+<font color="#3465A4">--- Search 15: Combined options - JSON output with size sorting ---</font>
+Command: <font color="#AD7FA8"><b>go run</b></font> ./cmd/gsearch-cli <font color="#34E2E2"><b>-db</b></font> <font color="#4E9A06">test.db</font> <font color="#34E2E2"><b>-q</b></font> <font color="#4E9A06">&apos;*.txt&apos;</font> <font color="#34E2E2"><b>-sort</b></font> <font color="#4E9A06">size</font> <font color="#34E2E2"><b>-output</b></font> <font color="#4E9A06">json</font>
+Explanation: Combine multiple options: wildcard search, sorting, and JSON output
+
+[
+  {
+    &quot;name&quot;: &quot;test.txt&quot;,
+    &quot;path&quot;: &quot;/home/user/test.txt&quot;,
+    &quot;type&quot;: &quot;file&quot;,
+    &quot;size&quot;: 1024,
+    &quot;mtime&quot;: &quot;2026-01-03T18:36:00-05:00&quot;,
+    &quot;mtime_ts&quot;: 1767483360
+  },
+  {
+    &quot;name&quot;: &quot;readme.txt&quot;,
+    &quot;path&quot;: &quot;/home/user/readme.txt&quot;,
+    &quot;type&quot;: &quot;file&quot;,
+    &quot;size&quot;: 2048,
+    &quot;mtime&quot;: &quot;2026-01-03T18:36:00-05:00&quot;,
+    &quot;mtime_ts&quot;: 1767483360
+  }
+]
+
+<font color="#4E9A06">=== Test run completed ===</font>
+</pre>
+</body>
+</html>
+</pre>
