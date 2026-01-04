@@ -108,7 +108,7 @@
                     <article class="repo-card">
                         <h3 class="repo-title">🧰 SimpleSok - revised</h3>
                         <div class="repo-row">
-                            <img src="https://raw.githubusercontent.com/runableapp/simplesok/main/simplesok-snapshot.png" alt="Dev Toolkit logo" class="repo-thumb">
+                            <img src="https://raw.githubusercontent.com/runableapp/simplesok/main/simplesok-snapshot.png" alt="Dev Toolkit logo" class="repo-thumb repo-thumb-clickable" id="simplesokThumb">
                             <div class="repo-content">
                                 <p class="repo-desc">This is a modified fork of Simple Sokoban version 1.0.7 that has been updated to:
 <ul>
@@ -117,6 +117,9 @@
 <li>Added <a href="https://classicreload.com/boxworld-full-game.html">BoxWorld graphics and levels</a></li>
 </ul></p>
                                 <a href="https://github.com/runableapp/simplesok" class="repo-link">View Repository</a>
+
+
+                                <a href="https://github.com/runableapp/simplesok-revised/releases/download/v1.0.8/simplesok-v1.0.8-linux-x86_64.zip" class="repo-link">Download Revised Version v1.0.8</a>
                             </div>
                         </div>
                     </article>
@@ -139,25 +142,45 @@
         </div>
     </div>
 
+    <div id="simplesokModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSimplesokModal()">&times;</button>
+            <img src="simplesok-revised/simplesok-screenshot.png" alt="SimpleSok screenshot" style="width:100%; height:100%; object-fit:contain; background:#000;">
+        </div>
+    </div>
+
     <script>
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
         const gsearchThumb = document.getElementById('gsearchThumb');
         const gsearchModal = document.getElementById('gsearchModal');
+        const simplesokThumb = document.getElementById('simplesokThumb');
+        const simplesokModal = document.getElementById('simplesokModal');
 
         gsearchThumb.addEventListener('click', function() {
             gsearchModal.style.display = 'block';
+        });
+
+        simplesokThumb && simplesokThumb.addEventListener('click', function() {
+            simplesokModal.style.display = 'block';
         });
 
         window.addEventListener('click', function(event) {
             if (event.target === gsearchModal) {
                 gsearchModal.style.display = 'none';
             }
+            if (event.target === simplesokModal) {
+                simplesokModal.style.display = 'none';
+            }
         });
 
         function closeGsearchModal() {
             gsearchModal.style.display = 'none';
+        }
+
+        function closeSimplesokModal() {
+            simplesokModal.style.display = 'none';
         }
     </script>
 
