@@ -109,6 +109,24 @@
                         </div>
                     </article>
 
+                    <article class="repo-card">
+                        <h3 class="repo-title">📖 goWikit</h3>
+                        <div class="repo-row">
+                            <img src="gowikit/gowikit_demo.svg" alt="goWikit demo" class="repo-thumb repo-thumb-clickable" id="gowikitThumb">
+                            <div class="repo-content">
+                                <p class="repo-desc">A command-line tool for quickly fetching Wikipedia summaries, written in Go. Single binary, no external dependencies. Inspired by the wikit Node.js project.</p>
+                                <ul>
+<li>Support for multiple languages with interactive disambiguation</li>
+<li>Open articles in browser or read in terminal</li>
+<li>Can also run as a service exposing REST APIs</li>
+</ul>
+                                <a href="https://github.com/runableapp/gowikit" class="repo-link">View Repository</a>
+
+                                <a href="https://github.com/runableapp/gowikit/releases" class="repo-link">Download Latest Release</a>
+                            </div>
+                        </div>
+                    </article>
+
                 </div>
             </div>
         </section>
@@ -139,6 +157,13 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeDiaryModal()">&times;</button>
             <img src="https://runableapp.github.io/diaryapp/i/entry_with_photo.png" alt="Diary app screenshot" style="width:100%; height:100%; object-fit:contain; background:#000;">
+        </div>
+    </div>
+
+    <div id="gowikitModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeGowikitModal()">&times;</button>
+            <img src="gowikit/gowikit_demo.svg" alt="goWikit demo" style="width:100%; height:100%; object-fit:contain; background:#000;">
         </div>
     </div>
 

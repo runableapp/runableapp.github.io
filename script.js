@@ -9,6 +9,9 @@ const simplesokModal = document.getElementById('simplesokModal');
 const diaryThumb = document.getElementById('diaryThumb');
 const diaryModal = document.getElementById('diaryModal');
 
+const gowikitThumb = document.getElementById('gowikitThumb');
+const gowikitModal = document.getElementById('gowikitModal');
+
 gsearchThumb.addEventListener('click', function() {
     gsearchModal.style.display = 'block';
 });
@@ -21,6 +24,10 @@ diaryThumb.addEventListener('click', function() {
     diaryModal.style.display = 'block';
 });
 
+gowikitThumb.addEventListener('click', function() {
+    gowikitModal.style.display = 'block';
+});
+
 window.addEventListener('click', function(event) {
     if (event.target === gsearchModal) {
         gsearchModal.style.display = 'none';
@@ -30,6 +37,9 @@ window.addEventListener('click', function(event) {
     }
     if (event.target === diaryModal) {
         diaryModal.style.display = 'none';
+    }
+    if (event.target === gowikitModal) {
+        gowikitModal.style.display = 'none';
     }
 });
 
@@ -43,4 +53,8 @@ function closeSimplesokModal() {
 
 function closeDiaryModal() {
     diaryModal.style.display = 'none';
+}
+
+function closeGowikitModal() {
+    gowikitModal.style.display = 'none';
 }
