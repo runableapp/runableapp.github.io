@@ -1,63 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 2026-01-12 20:27:50 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Runable.App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/i/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico">
+    <link rel="icon" href="/i/favicon.ico" sizes="any">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .repo-thumb-clickable {
-            cursor: pointer;
-        }
-        .repo-thumb-clickable:hover {
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            overflow: auto;
-        }
-        .modal-content {
-            background-color: #000;
-            margin: 5% auto;
-            padding: 0;
-            width: 90%;
-            height: 80vh;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        .modal-content iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .modal-close {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            color: #D3D7CF;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.7);
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            z-index: 1001;
-        }
-        .modal-close:hover {
-            color: #FCE94F;
-        }
-    </style>
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -80,12 +34,26 @@
 
     <main>
         <section class="hero">
-            <div class="hero-content">
-                <h1>🚀 Runable.App</h1>
-                <p>Leveraging AI to create smarter, faster applications. <br/>Harnessing the latest tech to bring ideas to life more efficiently.</p>
+            <div class="hero-title">
+                <p style="text-align: center; margin-bottom: 0; margin-top: 0; font-size: 2.2rem; color: #000;">to</p>
+                <h1 style="margin-top: 0; text-align: center;">🚀 Runable.App</h1>
             </div>
-            <div class="hero-image">
-                <img src="/i/man-with-computer.webp" alt="Software Development">
+            <div class="hero-body">
+                <div class="hero-image">
+                    <img src="/i/man-with-computer.webp" alt="Software Development">
+                </div>
+                <div class="hero-content">
+                    <h3>AI-powered software development</h3>
+                    <p>Leveraging AI to create smarter, faster applications. <br/>
+                    Harnessing the latest tech to bring ideas to life more efficiently.</p>
+
+                    <h3>Simple, Local, Self-Contained</h3>
+                    <p>
+                    Software should be simple, local, and self-contained. It should be a single executable that you can download and run. You shouldn’t need an installer or any other software prerequisites. At the very least, dependencies should be minimized.
+                    <br/>
+                    If an installer is required, it should not get in its own way. This involves installing the minimum necessary and ensuring that 'uninstall' actually undoes the install. You should be able to remove the software and have your system exactly as you found it, with no traces of the software installation behind.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -99,7 +67,7 @@
                         <div class="repo-row">
                             <img src="gsearch-cli/gsearch-cli-screenshot.png" alt="gsearch-cli screenshot" class="repo-thumb repo-thumb-clickable" id="gsearchThumb">
                             <div class="repo-content">
-                                <p class="repo-desc">A command-line interface for searching the FSearch database. This Go application reads and searches the binary database file created by <a href="https://github.com/cboxdoerfer/fsearch" target="_blank" rel="noopener noreferrer">FSearch</a>.</p>
+                                <p class="repo-desc">A command-line interface for searching the FSearch database. This Go application reads and searches the binary database file created by <a href="https://github.com/cboxdoerfer/fsearch">FSearch</a>.</p>
                                 <a href="https://github.com/runableapp/gsearch-cli" class="repo-link">View Repository</a>
 
                                 <a href="https://github.com/runableapp/gsearch-cli/releases" class="repo-link">Download Latest Release</a>
@@ -110,21 +78,37 @@
                     <article class="repo-card">
                         <h3 class="repo-title">🧰 SimpleSok - revised</h3>
                         <div class="repo-row">
-                            <img src="https://raw.githubusercontent.com/runableapp/simplesok/main/simplesok-snapshot.png" alt="Dev Toolkit logo" class="repo-thumb repo-thumb-clickable" id="simplesokThumb">
+                            <img src="https://raw.githubusercontent.com/runableapp/simplesok/main/simplesok-snapshot.png" alt="SimpleSok - revised screenshot" class="repo-thumb repo-thumb-clickable" id="simplesokThumb">
                             <div class="repo-content">
-                                <p class="repo-desc">This is a modified fork of Simple Sokoban version 1.0.7 that has been updated to:
-<ul>
+                                <p class="repo-desc">This is a modified fork of Simple Sokoban version 1.0.7 that has been updated to:</p>
+                                <ul>
 <li>Compile on modern Linux systems (tested on Ubuntu 24.04)</li>
 <li>Support Wayland display server with proper video driver configuration</li>
 <li>Added <a href="https://classicreload.com/boxworld-full-game.html">BoxWorld graphics and levels</a></li>
-</ul></p>
+</ul>
                                 <a href="https://github.com/runableapp/simplesok" class="repo-link">View Repository</a>
-
 
                                 <a href="https://github.com/runableapp/simplesok-revised/releases/download/v1.0.8/simplesok-v1.0.8-linux-x86_64.zip" class="repo-link">Download Revised Version v1.0.8</a>
                             </div>
                         </div>
                     </article>
+
+                    <article class="repo-card">
+                        <h3 class="repo-title">📔 Diary — 일기</h3>
+                        <div class="repo-row">
+                            <img src="https://runableapp.github.io/diaryapp/i/about.png" alt="Diary app screenshot" class="repo-thumb repo-thumb-clickable" id="diaryThumb">
+                            <div class="repo-content">
+                                <p class="repo-desc">A beautifully simple, secure personal journal. Write freely, attach photos, and keep your memories safe with password protection and AES-256 encryption. Available for Linux, Windows, and macOS.</p>
+                                <ul>
+<li>Password protected with auto-lock</li>
+<li>Rich text editor with photo attachments</li>
+<li>AES-256 encryption — no cloud, no tracking</li>
+</ul>
+                                <a href="https://runableapp.github.io/diaryapp/" class="repo-link">Software Page</a>
+                            </div>
+                        </div>
+                    </article>
+
                 </div>
             </div>
         </section>
@@ -147,44 +131,20 @@
     <div id="simplesokModal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeSimplesokModal()">&times;</button>
-            <img src="simplesok-revised/simplesok-screenshot.png" alt="SimpleSok screenshot" style="width:100%; height:100%; object-fit:contain; background:#000;">
+            <img src="simplesok-revised/simplesok-screenshot.png" alt="SimpleSok - revised screenshot" style="width:100%; height:100%; object-fit:contain; background:#000;">
         </div>
     </div>
 
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    <div id="diaryModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeDiaryModal()">&times;</button>
+            <img src="https://runableapp.github.io/diaryapp/i/entry_with_photo.png" alt="Diary app screenshot" style="width:100%; height:100%; object-fit:contain; background:#000;">
+        </div>
+    </div>
 
-        const gsearchThumb = document.getElementById('gsearchThumb');
-        const gsearchModal = document.getElementById('gsearchModal');
-        const simplesokThumb = document.getElementById('simplesokThumb');
-        const simplesokModal = document.getElementById('simplesokModal');
 
-        gsearchThumb.addEventListener('click', function() {
-            gsearchModal.style.display = 'block';
-        });
 
-        simplesokThumb && simplesokThumb.addEventListener('click', function() {
-            simplesokModal.style.display = 'block';
-        });
-
-        window.addEventListener('click', function(event) {
-            if (event.target === gsearchModal) {
-                gsearchModal.style.display = 'none';
-            }
-            if (event.target === simplesokModal) {
-                simplesokModal.style.display = 'none';
-            }
-        });
-
-        function closeGsearchModal() {
-            gsearchModal.style.display = 'none';
-        }
-
-        function closeSimplesokModal() {
-            simplesokModal.style.display = 'none';
-        }
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>

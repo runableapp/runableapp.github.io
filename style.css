@@ -34,20 +34,43 @@ header {
 }
 
 .hero {
-    max-width: 600px;
+    max-width: 900px;
     margin: -40px auto 80px;
     padding: 0 20px;
 }
 
+.hero-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero-body {
+    overflow: hidden;
+}
+
+.hero-content {
+    font-family: "Yeon Sung", cursive;
+    text-align: left;
+}
+
 .hero-image {
-    width: 50%;
-    margin: 0 auto;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    width: 30%;
+    max-width: 250px;
 }
 
 .hero-image img {
     width: 100%;
     height: auto;
     display: block;
+}
+
+.hero h1 {
+    font-family: "Yeon Sung", cursive;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }
 
 .hero h2 {
@@ -140,7 +163,7 @@ footer {
 .repo-card {
     display: block;
     padding: 16px;
-    border: 1px solid #eee;
+    border: none;
     border-radius: 8px;
     background: #fff;
 }
@@ -226,4 +249,63 @@ footer {
     animation: none;
     display: none;
   }
+}
+
+/* Repo thumbnail clickable styles */
+.repo-thumb-clickable {
+    cursor: pointer;
+}
+
+.repo-thumb-clickable:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #000;
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #D3D7CF;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    z-index: 1001;
+}
+
+.modal-close:hover {
+    color: #FCE94F;
 }
