@@ -12,6 +12,9 @@ const diaryModal = document.getElementById('diaryModal');
 const gowikitThumb = document.getElementById('gowikitThumb');
 const gowikitModal = document.getElementById('gowikitModal');
 
+const vibefilterThumb = document.getElementById('vibefilterThumb');
+const vibefilterModal = document.getElementById('vibefilterModal');
+
 gsearchThumb.addEventListener('click', function() {
     gsearchModal.style.display = 'block';
 });
@@ -28,6 +31,10 @@ gowikitThumb.addEventListener('click', function() {
     gowikitModal.style.display = 'block';
 });
 
+vibefilterThumb.addEventListener('click', function() {
+    vibefilterModal.style.display = 'block';
+});
+
 window.addEventListener('click', function(event) {
     if (event.target === gsearchModal) {
         gsearchModal.style.display = 'none';
@@ -40,6 +47,9 @@ window.addEventListener('click', function(event) {
     }
     if (event.target === gowikitModal) {
         gowikitModal.style.display = 'none';
+    }
+    if (event.target === vibefilterModal) {
+        vibefilterModal.style.display = 'none';
     }
 });
 
@@ -57,4 +67,8 @@ function closeDiaryModal() {
 
 function closeGowikitModal() {
     gowikitModal.style.display = 'none';
+}
+
+function closeVibefilterModal() {
+    vibefilterModal.style.display = 'none';
 }
