@@ -1,17 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- 2026-01-12 20:27:50 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Runable.App</title>
+    <title>Runable.App — AI-Powered Software Development</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/i/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico">
     <link rel="icon" href="/i/favicon.ico" sizes="any">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #ffffff;
+            --bg-card: #f8f9fa;
+            --bg-card-hover: #f1f3f5;
+            --surface: #eef0f2;
+            --border: #e2e5e9;
+            --border-hover: #cdd1d6;
+            --text: #1a1a2e;
+            --text-secondary: #555;
+            --text-muted: #888;
+            --accent: #2563eb;
+            --accent-glow: rgba(37, 99, 235, 0.08);
+            --accent-hover: #1d4ed8;
+            --gradient-start: #2563eb;
+            --gradient-end: #7c3aed;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --max-width: 1100px;
+            --transition: 0.2s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+        a:hover { color: var(--accent-hover); }
+
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+        /* ── Navigation ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+        .nav-brand img { height: 32px; width: auto; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        .hero-text { flex: 1; }
+        .hero-text .tagline {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            background: var(--accent-glow);
+            padding: 6px 14px;
+            border-radius: 100px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .hero-text h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 520px;
+        }
+        .hero-visual {
+            flex: 0 0 280px;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-visual img {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: var(--radius);
+            filter: drop-shadow(0 20px 60px rgba(59, 130, 246, 0.1));
+        }
+
+        /* ── Philosophy ── */
+        .philosophy {
+            padding: 60px 0 80px;
+            border-top: 1px solid var(--border);
+        }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .philosophy-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: border-color var(--transition), background var(--transition);
+        }
+        .philosophy-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+        .philosophy-card .icon {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            background: var(--surface);
+            border-radius: var(--radius-sm);
+        }
+        .philosophy-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .philosophy-card p {
+            font-size: 0.925rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ── Section Headers ── */
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .section-header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ── Software Grid ── */
+        .software-section { padding: 80px 0; }
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .software-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        .software-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        .software-card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .software-thumb-wrapper {
+            position: relative;
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+        }
+        .software-thumb {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+            cursor: pointer;
+            transition: opacity var(--transition);
+        }
+        .software-thumb:hover { opacity: 0.8; }
+        .software-badge {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e67e22;
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 700;
+            padding: 1px 8px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .software-card-header h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .software-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+        .software-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px 0;
+        }
+        .software-card ul li {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            padding: 3px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+        .software-card ul li::before {
+            content: '›';
+            position: absolute;
+            left: 4px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .software-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .software-links a {
+            font-size: 0.825rem;
+            font-weight: 500;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color var(--transition);
+        }
+        .software-links a:hover { color: var(--accent-hover); }
+        .software-links a::after {
+            content: '→';
+            font-size: 0.75rem;
+            transition: transform var(--transition);
+        }
+        .software-links a:hover::after { transform: translateX(2px); }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-inner p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .footer-inner a { color: var(--text-secondary); font-size: 0.875rem; }
+        .footer-inner a:hover { color: var(--text); }
+
+        /* ── Modal ── */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            overflow: auto;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 4% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1000px;
+            height: 80vh;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .modal-content iframe { width: 100%; height: 100%; border: none; }
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            color: #999;
+            font-size: 24px;
+            font-weight: 600;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border);
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+            z-index: 1001;
+            transition: color var(--transition), border-color var(--transition);
+        }
+        .modal-close:hover { color: #333; border-color: var(--border-hover); background: rgba(240, 240, 240, 0.95); }
+
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero { padding: 60px 0 50px; }
+            .hero-inner { flex-direction: column-reverse; gap: 32px; text-align: center; }
+            .hero-text p { max-width: 100%; }
+            .hero-visual { flex: none; }
+            .hero-visual img { max-width: 200px; }
+            .nav-links { display: none; }
+            .philosophy-grid { grid-template-columns: 1fr; }
+            .software-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -20,197 +407,227 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-4N0G7MTYN8');
 </script>
 
 <body>
-    <img src="/i/plane2.png" alt="" class="plane" aria-hidden="true">
-    <header>
-        <div class="container">
-            <img src="/i/runableapp-welcome.webp" alt="Runable Logo" class="logo">
-        </div>
-    </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-title">
-                <p style="text-align: center; margin-bottom: 0; margin-top: 0; font-size: 2.2rem; color: #000;">to</p>
-                <h1 style="margin-top: 0; text-align: center;">🚀 Runable.App</h1>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">
+                <img src="/i/runable-dad-small.webp" alt="Runable.App" style="height:36px; width:auto;">
+            </a>
+            <div class="nav-links">
+                <a href="#software">Software</a>
+                <a href="https://runable.app">Main Site</a>
+                <a href="https://runable.app/contact">Contact</a>
             </div>
-            <div class="hero-body">
-                <div class="hero-image">
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <span class="tagline">AI-Powered Development</span>
+                    <h1>Software that respects your machine.</h1>
+                    <p>Leveraging AI to create smarter, faster applications. We build simple, local, self-contained software — single executables you can download and run with no installers, no prerequisites, and no traces left behind.</p>
+                </div>
+                <div class="hero-visual">
                     <img src="/i/man-with-computer.webp" alt="Software Development">
                 </div>
-                <div class="hero-content">
-                    <h3>AI-powered software development</h3>
-                    <p>Leveraging AI to create smarter, faster applications. <br/>
-                    Harnessing the latest tech to bring ideas to life more efficiently.</p>
+            </div>
+        </div>
+    </section>
 
-                    <h3>Simple, Local, Self-Contained</h3>
-                    <p>
-                    Software should be simple, local, and self-contained. It should be a single executable that you can download and run. You shouldn’t need an installer or any other software prerequisites. At the very least, dependencies should be minimized.
-                    <br/>
-                    If an installer is required, it should not get in its own way. This involves installing the minimum necessary and ensuring that 'uninstall' actually undoes the install. You should be able to remove the software and have your system exactly as you found it, with no traces of the software installation behind.
-                    </p>
+    <!-- Philosophy -->
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="icon">⚡</div>
+                    <h3>Simple & Self-Contained</h3>
+                    <p>Software should be a single executable that you can download and run. No installers, no software prerequisites. Dependencies should be minimal or nonexistent.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="icon">🧹</div>
+                    <h3>Clean Install, Clean Uninstall</h3>
+                    <p>If an installer is required, it should install the minimum necessary and ensure 'uninstall' actually undoes everything. No traces of the software left behind.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="icon">🤖</div>
+                    <h3>AI-Powered Efficiency</h3>
+                    <p>Harnessing the latest AI technology to bring ideas to life more efficiently. Smarter tools, faster development cycles, better software.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="repos" class="repo-section">
-            <div class="container-grid">
-                <h2>Software Repositories</h2>
-
-                <div class="repo-grid">
-                    <article class="repo-card">
-                        <h3 class="repo-title">🔍 gsearch-cli</h3>
-                        <div class="repo-row">
-                            <img src="gsearch-cli/gsearch-cli-screenshot.png" alt="gsearch-cli screenshot" class="repo-thumb repo-thumb-clickable" id="gsearchThumb">
-                            <div class="repo-content">
-                                <p class="repo-desc">A command-line interface for searching the FSearch database. This Go application reads and searches the binary database file created by <a href="https://github.com/cboxdoerfer/fsearch">FSearch</a>.</p>
-                                <a href="https://github.com/runableapp/gsearch-cli" class="repo-link">View Repository</a>
-
-                                <a href="https://github.com/runableapp/gsearch-cli/releases" class="repo-link">Download Latest Release</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="repo-card">
-                        <h3 class="repo-title">🧰 SimpleSok - revised</h3>
-                        <div class="repo-row">
-                            <img src="https://raw.githubusercontent.com/runableapp/simplesok/main/simplesok-snapshot.png" alt="SimpleSok - revised screenshot" class="repo-thumb repo-thumb-clickable" id="simplesokThumb">
-                            <div class="repo-content">
-                                <p class="repo-desc">This is a modified fork of Simple Sokoban version 1.0.7 that has been updated to:</p>
-                                <ul>
-<li>Compile on modern Linux systems (tested on Ubuntu 24.04)</li>
-<li>Support Wayland display server with proper video driver configuration</li>
-<li>Added <a href="https://classicreload.com/boxworld-full-game.html">BoxWorld graphics and levels</a></li>
-</ul>
-                                <a href="https://github.com/runableapp/simplesok" class="repo-link">View Repository</a>
-
-                                <a href="https://github.com/runableapp/simplesok-revised/releases/download/v1.0.8/simplesok-v1.0.8-linux-x86_64.zip" class="repo-link">Download Revised Version v1.0.8</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="repo-card">
-                        <h3 class="repo-title">📔 Diary — 일기</h3>
-                        <div class="repo-row">
-                            <img src="https://runableapp.github.io/diaryapp/i/about.png" alt="Diary app screenshot" class="repo-thumb repo-thumb-clickable" id="diaryThumb">
-                            <div class="repo-content">
-                                <p class="repo-desc">A beautifully simple, secure personal journal. Write freely, attach photos, and keep your memories safe with password protection and AES-256 encryption. Available for Linux, Windows, and macOS.</p>
-                                <ul>
-<li>Password protected with auto-lock</li>
-<li>Rich text editor with photo attachments</li>
-<li>AES-256 encryption — no cloud, no tracking</li>
-</ul>
-                                <a href="https://runableapp.github.io/diaryapp/" class="repo-link">Software Page</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="repo-card">
-                        <h3 class="repo-title">📖 goWikit</h3>
-                        <div class="repo-row">
-                            <img src="gowikit/gowikit_demo.svg" alt="goWikit demo" class="repo-thumb repo-thumb-clickable" id="gowikitThumb">
-                            <div class="repo-content">
-                                <p class="repo-desc">A command-line tool for quickly fetching Wikipedia summaries, written in Go. Single binary, no external dependencies. Inspired by the wikit Node.js project.</p>
-                                <ul>
-<li>Support for multiple languages with interactive disambiguation</li>
-<li>Open articles in browser or read in terminal</li>
-<li>Can also run as a service exposing REST APIs</li>
-</ul>
-                                <a href="https://github.com/runableapp/gowikit" class="repo-link">View Repository</a>
-
-                                <a href="https://github.com/runableapp/gowikit/releases" class="repo-link">Download Latest Release</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="repo-card">
-                        <h3 class="repo-title">🧹 걸러드림 (VibeFilter)</h3>
-                        <div class="repo-row">
-                            <img src="https://runableapp.github.io/vibefilter/i/vibefilter_logo-s.webp" alt="VibeFilter logo" class="repo-thumb repo-thumb-clickable" id="vibefilterThumb">
-                            <div class="repo-content">
-                                <p class="repo-desc">A Chrome extension that automatically collects popular posts from 15 Korean communities, learns your reading preferences with in-browser AI, and recommends posts you'll actually want to read. No server required.</p>
-                                <ul>
-<li>In-browser AI learning with TF-IDF and logistic regression</li>
-<li>Tracks read posts and supports author blocking</li>
-<li>100% private — all data stays in your browser</li>
-</ul>
-                                <p class="repo-desc">15개 한국 커뮤니티의 인기 게시글을 자동으로 수집하고, 브라우저 내 AI가 읽기 패턴을 학습하여 관심 있는 글만 추천해주는 크롬 확장 프로그램입니다. 서버가 필요 없습니다.</p>
-                                <ul>
-<li>TF-IDF 및 로지스틱 회귀를 활용한 브라우저 내 AI 학습</li>
-<li>읽은 글 추적 및 작성자 차단 지원</li>
-<li>100% 프라이버시 — 모든 데이터는 브라우저에만 저장</li>
-</ul>
-                                <a href="https://runableapp.github.io/vibefilter/" class="repo-link">Software Page</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="repo-card">
-                        <h3 class="repo-title">📰 gonewsd</h3>
-                        <div class="repo-row">
-                            <img src="https://runableapp.github.io/gonewsd/gonewsd.webp" alt="gonewsd screenshot" class="repo-thumb repo-thumb-clickable" id="gonewsdThumb">
-                            <div class="repo-content">
-                                <p class="repo-desc">A lightweight, standalone NNTP news server written in Go. A port of the original <a href="https://github.com/erco77/newsd">newsd</a> by Greg Ercolano, designed for hosting private newsgroups on your local network or via the internet.</p>
-                                <ul>
-<li>Built-in user authentication with per-group access controls</li>
-<li>Mail-to-news gateway for posting via email</li>
-<li>Single static binary, no external dependencies</li>
-</ul>
-                                <a href="https://runableapp.github.io/gonewsd/" class="repo-link">Software Page</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="repo-card">
-                        <h3 class="repo-title">📝 PostNote</h3>
-                        <div class="repo-row">
-                            <img src="https://runableapp.github.io/postnoteapp/postnote.svg" alt="PostNote icon" class="repo-thumb repo-thumb-clickable" id="postnoteThumb">
-                            <div class="repo-content">
-                                <p class="repo-desc">Modern sticky notes for Linux with native Wayland support, written in Go. Manage multiple notes through a system tray indicator with customizable colors, fonts, and categories.</p>
-                                <ul>
-<li>System tray indicator with lock/unlock and keyboard shortcuts</li>
-<li>Wayland position saving via GNOME window-calls extension</li>
-<li>All resources embedded in the binary for portability</li>
-</ul>
-                                <a href="https://runableapp.github.io/postnoteapp/" class="repo-link">Software Page</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="repo-card">
-                        <h3 class="repo-title">🌐 seCMS — Simply Efficient CMS</h3>
-                        <div class="repo-row">
-                            <div class="repo-thumb-wrapper">
-                                <img src="https://runableapp.github.io/secmsapp/images/secms-icon.webp" alt="seCMS icon" class="repo-thumb repo-thumb-clickable" id="secmsThumb">
-                                <span class="repo-thumb-badge">Beta Testing</span>
-                            </div>
-                            <div class="repo-content">
-                                <p class="repo-desc">Create beautiful static websites without writing code. A visual editor with live preview, built-in themes, and one-click publishing. Runs as a native desktop app on Linux, macOS, and Windows.</p>
-                                <ul>
-<li>Visual three-pane editor with live preview</li>
-<li>10+ built-in themes for business, portfolio, docs, and more</li>
-</ul>
-                                <a href="https://runableapp.github.io/secmsapp/" class="repo-link">Software Page</a>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
+    <!-- Software -->
+    <section id="software" class="software-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Software</h2>
+                <p>Tools and applications built with care for developers and users alike.</p>
             </div>
-        </section>
-    </main>
 
+            <div class="software-grid">
+
+                <!-- gsearch-cli -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <img src="gsearch-cli/gsearch-cli-screenshot.png" alt="gsearch-cli screenshot" class="software-thumb" id="gsearchThumb">
+                        <h3>gsearch-cli</h3>
+                    </div>
+                    <p>A command-line interface for searching the FSearch database. This Go application reads and searches the binary database file created by <a href="https://github.com/cboxdoerfer/fsearch">FSearch</a>.</p>
+                    <div class="software-links">
+                        <a href="https://github.com/runableapp/gsearch-cli">View Repository</a>
+                        <a href="https://github.com/runableapp/gsearch-cli/releases">Download</a>
+                    </div>
+                </article>
+
+                <!-- SimpleSok -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <img src="https://raw.githubusercontent.com/runableapp/simplesok/main/simplesok-snapshot.png" alt="SimpleSok screenshot" class="software-thumb" id="simplesokThumb">
+                        <h3>SimpleSok — revised</h3>
+                    </div>
+                    <p>A modified fork of Simple Sokoban v1.0.7 updated for modern Linux, Wayland support, and <a href="https://classicreload.com/boxworld-full-game.html">BoxWorld graphics</a>.</p>
+                    <ul>
+                        <li>Compiles on modern Linux (Ubuntu 24.04)</li>
+                        <li>Wayland display server support</li>
+                        <li>BoxWorld graphics and levels</li>
+                    </ul>
+                    <div class="software-links">
+                        <a href="https://github.com/runableapp/simplesok">View Repository</a>
+                        <a href="https://github.com/runableapp/simplesok-revised/releases/download/v1.0.8/simplesok-v1.0.8-linux-x86_64.zip">Download v1.0.8</a>
+                    </div>
+                </article>
+
+                <!-- Diary -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <img src="https://runableapp.github.io/diaryapp/i/about.png" alt="Diary app" class="software-thumb" id="diaryThumb">
+                        <h3>Diary — 일기</h3>
+                    </div>
+                    <p>A beautifully simple, secure personal journal. Write freely, attach photos, and keep your memories safe with password protection and AES-256 encryption. Linux, Windows, and macOS.</p>
+                    <ul>
+                        <li>Password protected with auto-lock</li>
+                        <li>Rich text editor with photo attachments</li>
+                        <li>AES-256 encryption — no cloud, no tracking</li>
+                    </ul>
+                    <div class="software-links">
+                        <a href="https://runableapp.github.io/diaryapp/">Software Page</a>
+                    </div>
+                </article>
+
+                <!-- goWikit -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <img src="gowikit/gowikit_demo.svg" alt="goWikit demo" class="software-thumb" id="gowikitThumb">
+                        <h3>goWikit</h3>
+                    </div>
+                    <p>A command-line tool for quickly fetching Wikipedia summaries, written in Go. Single binary, no external dependencies.</p>
+                    <ul>
+                        <li>Multiple languages with interactive disambiguation</li>
+                        <li>Open articles in browser or terminal</li>
+                        <li>Can run as a service with REST APIs</li>
+                    </ul>
+                    <div class="software-links">
+                        <a href="https://github.com/runableapp/gowikit">View Repository</a>
+                        <a href="https://github.com/runableapp/gowikit/releases">Download</a>
+                    </div>
+                </article>
+
+                <!-- VibeFilter -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <img src="https://runableapp.github.io/vibefilter/i/vibefilter_logo-s.webp" alt="VibeFilter logo" class="software-thumb" id="vibefilterThumb">
+                        <h3>걸러드림 (VibeFilter)</h3>
+                    </div>
+                    <p>A Chrome extension that automatically collects popular posts from 15 Korean communities, learns your reading preferences with in-browser AI, and recommends posts you'll actually want to read.</p>
+                    <ul>
+                        <li>In-browser AI with TF-IDF and logistic regression</li>
+                        <li>Tracks read posts and supports author blocking</li>
+                        <li>100% private — all data stays in your browser</li>
+                    </ul>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">15개 한국 커뮤니티의 인기 게시글을 자동으로 수집하고, 브라우저 내 AI가 읽기 패턴을 학습하여 관심 있는 글만 추천해주는 크롬 확장 프로그램입니다.</p>
+                    <div class="software-links">
+                        <a href="https://runableapp.github.io/vibefilter/">Software Page</a>
+                    </div>
+                </article>
+
+                <!-- gonewsd -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <img src="https://runableapp.github.io/gonewsd/gonewsd.webp" alt="gonewsd screenshot" class="software-thumb" id="gonewsdThumb">
+                        <h3>gonewsd</h3>
+                    </div>
+                    <p>A lightweight, standalone NNTP news server written in Go. A port of the original <a href="https://github.com/erco77/newsd">newsd</a>, designed for hosting private newsgroups.</p>
+                    <ul>
+                        <li>Built-in authentication with per-group ACLs</li>
+                        <li>Mail-to-news gateway for posting via email</li>
+                        <li>Single static binary, no dependencies</li>
+                    </ul>
+                    <div class="software-links">
+                        <a href="https://runableapp.github.io/gonewsd/">Software Page</a>
+                    </div>
+                </article>
+
+                <!-- PostNote -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <img src="https://runableapp.github.io/postnoteapp/postnote.svg" alt="PostNote icon" class="software-thumb" id="postnoteThumb">
+                        <h3>PostNote</h3>
+                    </div>
+                    <p>Modern sticky notes for Linux with native Wayland support, written in Go. Manage multiple notes through a system tray indicator.</p>
+                    <ul>
+                        <li>System tray with lock/unlock and shortcuts</li>
+                        <li>Wayland position saving via GNOME extension</li>
+                        <li>All resources embedded in the binary</li>
+                    </ul>
+                    <div class="software-links">
+                        <a href="https://runableapp.github.io/postnoteapp/">Software Page</a>
+                    </div>
+                </article>
+
+                <!-- seCMS -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <div class="software-thumb-wrapper">
+                            <img src="https://runableapp.github.io/secmsapp/images/secms-icon.webp" alt="seCMS icon" class="software-thumb" id="secmsThumb">
+                            <span class="software-badge">Beta</span>
+                        </div>
+                        <h3>seCMS — Simply Efficient CMS</h3>
+                    </div>
+                    <p>Create beautiful static websites without writing code. A visual editor with live preview, built-in themes, and one-click publishing. Linux, macOS, and Windows.</p>
+                    <ul>
+                        <li>Visual three-pane editor with live preview</li>
+                        <li>10+ built-in themes for business, portfolio, and more</li>
+                    </ul>
+                    <div class="software-links">
+                        <a href="https://runableapp.github.io/secmsapp/">Software Page</a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <p>© 2025-<span id="currentYear"></span> <a href="https://runable.app" class="footer-link">Runable.App</a></p>
-            <a href="https://runable.app/contact" class="footer-link">📧 Get in Touch</a>
+        <div class="container">
+            <div class="footer-inner">
+                <p>&copy; 2025&ndash;<span id="currentYear"></span> <a href="https://runable.app">Runable.App</a></p>
+                <a href="https://runable.app/contact">Get in Touch &rarr;</a>
+            </div>
         </div>
     </footer>
 
+    <!-- Modals -->
     <div id="gsearchModal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeGsearchModal()">&times;</button>
@@ -221,7 +638,7 @@
     <div id="simplesokModal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeSimplesokModal()">&times;</button>
-            <img src="simplesok-revised/simplesok-screenshot.png" alt="SimpleSok - revised screenshot" style="width:100%; height:100%; object-fit:contain; background:#000;">
+            <img src="simplesok-revised/simplesok-screenshot.png" alt="SimpleSok screenshot" style="width:100%; height:100%; object-fit:contain; background:#000;">
         </div>
     </div>
 
@@ -267,9 +684,6 @@
         </div>
     </div>
 
-
-
     <script src="script.js"></script>
-
 </body>
 </html>
