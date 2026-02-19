@@ -18,6 +18,9 @@ const vibefilterModal = document.getElementById('vibefilterModal');
 const gonewsdThumb = document.getElementById('gonewsdThumb');
 const gonewsdModal = document.getElementById('gonewsdModal');
 
+const postnoteThumb = document.getElementById('postnoteThumb');
+const postnoteModal = document.getElementById('postnoteModal');
+
 gsearchThumb.addEventListener('click', function() {
     gsearchModal.style.display = 'block';
 });
@@ -42,6 +45,10 @@ gonewsdThumb.addEventListener('click', function() {
     gonewsdModal.style.display = 'block';
 });
 
+postnoteThumb.addEventListener('click', function() {
+    postnoteModal.style.display = 'block';
+});
+
 window.addEventListener('click', function(event) {
     if (event.target === gsearchModal) {
         gsearchModal.style.display = 'none';
@@ -60,6 +67,9 @@ window.addEventListener('click', function(event) {
     }
     if (event.target === gonewsdModal) {
         gonewsdModal.style.display = 'none';
+    }
+    if (event.target === postnoteModal) {
+        postnoteModal.style.display = 'none';
     }
 });
 
@@ -85,4 +95,8 @@ function closeVibefilterModal() {
 
 function closeGonewsdModal() {
     gonewsdModal.style.display = 'none';
+}
+
+function closePostnoteModal() {
+    postnoteModal.style.display = 'none';
 }
