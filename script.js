@@ -1,5 +1,16 @@
 document.getElementById('currentYear').textContent = new Date().getFullYear();
 
+const navHamburger = document.getElementById('navHamburger');
+const navLinks = document.getElementById('navLinks');
+navHamburger.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+    });
+});
+
 const gsearchThumb = document.getElementById('gsearchThumb');
 const gsearchModal = document.getElementById('gsearchModal');
 

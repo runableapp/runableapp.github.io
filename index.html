@@ -59,6 +59,7 @@
             border-bottom: 1px solid var(--border);
         }
         .nav-inner {
+            position: relative;
             max-width: var(--max-width);
             margin: 0 auto;
             padding: 0 24px;
@@ -76,14 +77,27 @@
             color: var(--text);
         }
         .nav-brand img { height: 32px; width: auto; }
-        .nav-links { display: flex; gap: 28px; }
+        .nav-links { display: flex; gap: 8px; }
         .nav-links a {
             color: var(--text-secondary);
             font-size: 0.875rem;
             font-weight: 500;
-            transition: color var(--transition);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            transition: color var(--transition), background var(--transition);
         }
-        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover { color: var(--text); background: var(--surface); }
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--text);
+            line-height: 1;
+        }
 
         /* ── Hero ── */
         .hero {
@@ -155,7 +169,7 @@
         }
         .philosophy-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 24px;
         }
         .philosophy-card {
@@ -212,7 +226,7 @@
         .software-section { padding: 80px 0; }
         .software-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
             gap: 20px;
         }
         .software-card {
@@ -312,6 +326,8 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            padding: 6px 0;
+            min-height: 44px;
             transition: color var(--transition);
         }
         .software-links a:hover { color: var(--accent-hover); }
@@ -394,9 +410,36 @@
             .hero-text p { max-width: 100%; }
             .hero-visual { flex: none; }
             .hero-visual img { max-width: 200px; }
-            .nav-links { display: none; }
+            .nav-hamburger { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.97);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid var(--border);
+                padding: 8px 24px 16px;
+                gap: 0;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a {
+                padding: 12px 0;
+                font-size: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-links a:last-child { border-bottom: none; }
+            .nav-links a:hover { background: none; }
             .philosophy-grid { grid-template-columns: 1fr; }
             .software-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 400px) {
+            .container { padding: 0 16px; }
+            .philosophy-card { padding: 24px; }
+            .software-card { padding: 20px; }
         }
     </style>
 </head>
@@ -419,11 +462,12 @@
             <a href="/" class="nav-brand">
                 <img src="/i/runable-dad-small.webp" alt="Runable.App" style="height:36px; width:auto;">
             </a>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#software">Software</a>
                 <a href="https://runable.app">Main Site</a>
                 <a href="https://runable.app/contact">Contact</a>
             </div>
+            <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">&#9776;</button>
         </div>
     </nav>
 
