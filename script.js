@@ -21,6 +21,9 @@ const gonewsdModal = document.getElementById('gonewsdModal');
 const postnoteThumb = document.getElementById('postnoteThumb');
 const postnoteModal = document.getElementById('postnoteModal');
 
+const secmsThumb = document.getElementById('secmsThumb');
+const secmsModal = document.getElementById('secmsModal');
+
 gsearchThumb.addEventListener('click', function() {
     gsearchModal.style.display = 'block';
 });
@@ -49,6 +52,10 @@ postnoteThumb.addEventListener('click', function() {
     postnoteModal.style.display = 'block';
 });
 
+secmsThumb.addEventListener('click', function() {
+    secmsModal.style.display = 'block';
+});
+
 window.addEventListener('click', function(event) {
     if (event.target === gsearchModal) {
         gsearchModal.style.display = 'none';
@@ -70,6 +77,9 @@ window.addEventListener('click', function(event) {
     }
     if (event.target === postnoteModal) {
         postnoteModal.style.display = 'none';
+    }
+    if (event.target === secmsModal) {
+        secmsModal.style.display = 'none';
     }
 });
 
@@ -99,4 +109,8 @@ function closeGonewsdModal() {
 
 function closePostnoteModal() {
     postnoteModal.style.display = 'none';
+}
+
+function closeSecmsModal() {
+    secmsModal.style.display = 'none';
 }
