@@ -112,6 +112,9 @@ const gsearchModal = document.getElementById('gsearchModal');
 const simplesokThumb = document.getElementById('simplesokThumb');
 const simplesokModal = document.getElementById('simplesokModal');
 
+const simplescreeneditorThumb = document.getElementById('simplescreeneditorThumb');
+const simplescreeneditorModal = document.getElementById('simplescreeneditorModal');
+
 const diaryThumb = document.getElementById('diaryThumb');
 const diaryModal = document.getElementById('diaryModal');
 
@@ -142,6 +145,10 @@ gsearchThumb.addEventListener('click', function() {
 
 simplesokThumb.addEventListener('click', function() {
     simplesokModal.style.display = 'block';
+});
+
+simplescreeneditorThumb.addEventListener('click', function() {
+    simplescreeneditorModal.style.display = 'block';
 });
 
 diaryThumb.addEventListener('click', function() {
@@ -192,6 +199,9 @@ window.addEventListener('click', function(event) {
     }
     if (event.target === simplesokModal) {
         simplesokModal.style.display = 'none';
+    }
+    if (event.target === simplescreeneditorModal) {
+        simplescreeneditorModal.style.display = 'none';
     }
     if (event.target === diaryModal) {
         diaryModal.style.display = 'none';
