@@ -115,6 +115,9 @@ const simplesokModal = document.getElementById('simplesokModal');
 const simplescreeneditorThumb = document.getElementById('simplescreeneditorThumb');
 const simplescreeneditorModal = document.getElementById('simplescreeneditorModal');
 
+const iyagidosboxThumb = document.getElementById('iyagidosboxThumb');
+const iyagidosboxModal = document.getElementById('iyagidosboxModal');
+
 const diaryThumb = document.getElementById('diaryThumb');
 const diaryModal = document.getElementById('diaryModal');
 
@@ -149,6 +152,10 @@ simplesokThumb.addEventListener('click', function() {
 
 simplescreeneditorThumb.addEventListener('click', function() {
     simplescreeneditorModal.style.display = 'block';
+});
+
+iyagidosboxThumb.addEventListener('click', function() {
+    iyagidosboxModal.style.display = 'block';
 });
 
 diaryThumb.addEventListener('click', function() {
@@ -202,6 +209,9 @@ window.addEventListener('click', function(event) {
     }
     if (event.target === simplescreeneditorModal) {
         simplescreeneditorModal.style.display = 'none';
+    }
+    if (event.target === iyagidosboxModal) {
+        iyagidosboxModal.style.display = 'none';
     }
     if (event.target === diaryModal) {
         diaryModal.style.display = 'none';
