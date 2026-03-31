@@ -1,12 +1,5 @@
-document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-const GA_MEASUREMENT_ID = 'G-4N0G7MTYN8';
-
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-    window.dataLayer.push(arguments);
-}
-window.gtag = gtag;
+const currentYear = document.getElementById('currentYear');
+if (currentYear) currentYear.textContent = new Date().getFullYear();
 
 function loadExternalScript(src) {
     const script = document.createElement('script');
@@ -15,21 +8,20 @@ function loadExternalScript(src) {
     document.head.appendChild(script);
 }
 
-gtag('js', new Date());
-gtag('config', GA_MEASUREMENT_ID);
-loadExternalScript(`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`);
 loadExternalScript('//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit');
 
 const navHamburger = document.getElementById('navHamburger');
 const navLinks = document.getElementById('navLinks');
-navHamburger.addEventListener('click', function() {
-    navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
-        navLinks.classList.remove('open');
+if (navHamburger && navLinks) {
+    navHamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
     });
-});
+    navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('open');
+        });
+    });
+}
 
 const langToggle = document.getElementById('langToggle');
 const langMenu = document.getElementById('langMenu');
@@ -106,6 +98,23 @@ function googleTranslateElementInit() {
 
 window.googleTranslateElementInit = googleTranslateElementInit;
 
+function openModal(modal) {
+    if (!modal) return;
+    modal.style.display = 'block';
+}
+
+function closeModal(modal) {
+    if (!modal) return;
+    modal.style.display = 'none';
+}
+
+function bindThumbToModal(thumb, modal) {
+    if (!thumb || !modal) return;
+    thumb.addEventListener('click', function() {
+        openModal(modal);
+    });
+}
+
 const gsearchThumb = document.getElementById('gsearchThumb');
 const gsearchModal = document.getElementById('gsearchModal');
 
@@ -142,99 +151,38 @@ const dictionaryModal = document.getElementById('dictionaryModal');
 const secmsThumb = document.getElementById('secmsThumb');
 const secmsModal = document.getElementById('secmsModal');
 
-gsearchThumb.addEventListener('click', function() {
-    gsearchModal.style.display = 'block';
-});
-
-simplesokThumb.addEventListener('click', function() {
-    simplesokModal.style.display = 'block';
-});
-
-simplescreeneditorThumb.addEventListener('click', function() {
-    simplescreeneditorModal.style.display = 'block';
-});
-
-iyagidosboxThumb.addEventListener('click', function() {
-    iyagidosboxModal.style.display = 'block';
-});
-
-diaryThumb.addEventListener('click', function() {
-    diaryModal.style.display = 'block';
-});
-
-gowikitThumb.addEventListener('click', function() {
-    gowikitModal.style.display = 'block';
-});
-
-vibefilterThumb.addEventListener('click', function() {
-    vibefilterModal.style.display = 'block';
-});
-
-gonewsdThumb.addEventListener('click', function() {
-    gonewsdModal.style.display = 'block';
-});
-
-postnoteThumb.addEventListener('click', function() {
-    postnoteModal.style.display = 'block';
-});
-
-ttsonnxThumb.addEventListener('click', function() {
-    ttsonnxModal.style.display = 'block';
-});
-
-dictionaryThumb.addEventListener('click', function() {
-    dictionaryModal.style.display = 'block';
-});
-
-secmsThumb.addEventListener('click', function() {
-    secmsModal.style.display = 'block';
-});
+bindThumbToModal(gsearchThumb, gsearchModal);
+bindThumbToModal(simplesokThumb, simplesokModal);
+bindThumbToModal(simplescreeneditorThumb, simplescreeneditorModal);
+bindThumbToModal(iyagidosboxThumb, iyagidosboxModal);
+bindThumbToModal(diaryThumb, diaryModal);
+bindThumbToModal(gowikitThumb, gowikitModal);
+bindThumbToModal(vibefilterThumb, vibefilterModal);
+bindThumbToModal(gonewsdThumb, gonewsdModal);
+bindThumbToModal(postnoteThumb, postnoteModal);
+bindThumbToModal(ttsonnxThumb, ttsonnxModal);
+bindThumbToModal(dictionaryThumb, dictionaryModal);
+bindThumbToModal(secmsThumb, secmsModal);
 
 document.querySelectorAll('[data-close-modal]').forEach(function(button) {
     button.addEventListener('click', function() {
         const modalId = button.getAttribute('data-close-modal');
         const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = 'none';
-        }
+        closeModal(modal);
     });
 });
 
 window.addEventListener('click', function(event) {
-    if (event.target === gsearchModal) {
-        gsearchModal.style.display = 'none';
-    }
-    if (event.target === simplesokModal) {
-        simplesokModal.style.display = 'none';
-    }
-    if (event.target === simplescreeneditorModal) {
-        simplescreeneditorModal.style.display = 'none';
-    }
-    if (event.target === iyagidosboxModal) {
-        iyagidosboxModal.style.display = 'none';
-    }
-    if (event.target === diaryModal) {
-        diaryModal.style.display = 'none';
-    }
-    if (event.target === gowikitModal) {
-        gowikitModal.style.display = 'none';
-    }
-    if (event.target === vibefilterModal) {
-        vibefilterModal.style.display = 'none';
-    }
-    if (event.target === gonewsdModal) {
-        gonewsdModal.style.display = 'none';
-    }
-    if (event.target === postnoteModal) {
-        postnoteModal.style.display = 'none';
-    }
-    if (event.target === ttsonnxModal) {
-        ttsonnxModal.style.display = 'none';
-    }
-    if (event.target === dictionaryModal) {
-        dictionaryModal.style.display = 'none';
-    }
-    if (event.target === secmsModal) {
-        secmsModal.style.display = 'none';
-    }
+    if (event.target === gsearchModal) closeModal(gsearchModal);
+    if (event.target === simplesokModal) closeModal(simplesokModal);
+    if (event.target === simplescreeneditorModal) closeModal(simplescreeneditorModal);
+    if (event.target === iyagidosboxModal) closeModal(iyagidosboxModal);
+    if (event.target === diaryModal) closeModal(diaryModal);
+    if (event.target === gowikitModal) closeModal(gowikitModal);
+    if (event.target === vibefilterModal) closeModal(vibefilterModal);
+    if (event.target === gonewsdModal) closeModal(gonewsdModal);
+    if (event.target === postnoteModal) closeModal(postnoteModal);
+    if (event.target === ttsonnxModal) closeModal(ttsonnxModal);
+    if (event.target === dictionaryModal) closeModal(dictionaryModal);
+    if (event.target === secmsModal) closeModal(secmsModal);
 });
