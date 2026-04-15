@@ -130,6 +130,9 @@ const iyagidosboxModal = document.getElementById('iyagidosboxModal');
 const gotransThumb = document.getElementById('gotransThumb');
 const gotransModal = document.getElementById('gotransModal');
 
+const gopherWebBridgeThumb = document.getElementById('gopherWebBridgeThumb');
+const gopherWebBridgeModal = document.getElementById('gopherWebBridgeModal');
+
 const diaryThumb = document.getElementById('diaryThumb');
 const diaryModal = document.getElementById('diaryModal');
 
@@ -159,6 +162,7 @@ bindThumbToModal(simplesokThumb, simplesokModal);
 bindThumbToModal(simplescreeneditorThumb, simplescreeneditorModal);
 bindThumbToModal(iyagidosboxThumb, iyagidosboxModal);
 bindThumbToModal(gotransThumb, gotransModal);
+bindThumbToModal(gopherWebBridgeThumb, gopherWebBridgeModal);
 bindThumbToModal(diaryThumb, diaryModal);
 bindThumbToModal(gowikitThumb, gowikitModal);
 bindThumbToModal(vibefilterThumb, vibefilterModal);
@@ -182,6 +186,7 @@ window.addEventListener('click', function(event) {
     if (event.target === simplescreeneditorModal) closeModal(simplescreeneditorModal);
     if (event.target === iyagidosboxModal) closeModal(iyagidosboxModal);
     if (event.target === gotransModal) closeModal(gotransModal);
+    if (event.target === gopherWebBridgeModal) closeModal(gopherWebBridgeModal);
     if (event.target === diaryModal) closeModal(diaryModal);
     if (event.target === gowikitModal) closeModal(gowikitModal);
     if (event.target === vibefilterModal) closeModal(vibefilterModal);

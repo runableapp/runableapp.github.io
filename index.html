@@ -348,6 +348,23 @@
                     </div>
                 </article>
 
+                <!-- gopher-gemini-web-bridge -->
+                <article class="software-card">
+                    <div class="software-card-header">
+                        <span class="software-thumb software-thumb-emoji" id="gopherWebBridgeThumb" role="img" aria-label="gopher-gemini-web-bridge">🌐</span>
+                        <h3>gopher-gemini-web-bridge</h3>
+                    </div>
+                    <p>A small gateway that converts modern websites into lightweight text for Gopher and Gemini clients. Give it an HTTP(S) URL and it emits a Gopher menu or Gemini (gemtext) output.</p>
+                    <ul>
+                        <li>CLI and CGI modes for Gopher/Gemini servers</li>
+                        <li>Link bridging options so pages route back through your gateway</li>
+                        <li>SSRF hardening: blocks private/loopback/link-local destinations by default</li>
+                    </ul>
+                    <div class="software-links">
+                        <a href="https://github.com/runableapp/gopher-gemini-web-bridge">View Repository</a>
+                    </div>
+                </article>
+
             </div>
         </div>
     </section>
@@ -395,6 +412,13 @@
         <div class="modal-content">
             <button class="modal-close" data-close-modal="gotransModal" aria-label="Close gotrans modal">&times;</button>
             <iframe src="https://runableapp.github.io/gotrans/index.html" title="gotrans preview"></iframe>
+        </div>
+    </div>
+
+    <div id="gopherWebBridgeModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal="gopherWebBridgeModal" aria-label="Close gopher-gemini-web-bridge modal">&times;</button>
+            <iframe src="https://raw.githubusercontent.com/runableapp/gopher-gemini-web-bridge/main/README.md" title="gopher-gemini-web-bridge README"></iframe>
         </div>
     </div>
 
